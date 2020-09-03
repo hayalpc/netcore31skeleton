@@ -1,0 +1,73 @@
+{
+  "Routes": [
+    {
+      //internal config
+      "DownstreamPathTemplate": "/api/{controller}/{action}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 37790
+        }
+      ],
+      "DownstreamHeaderTransform": {
+        "Server": "Kestrel, Server"
+      },
+      //external config
+      "UpstreamPathTemplate": "/{controller}/{action}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ],
+      "UpstreamHeaderTransform": {
+        "X-Forwarded-For": "{RemoteIpAddress}"
+      }
+
+    },
+    {
+      //internal config
+      "DownstreamPathTemplate": "/api/{controller}/{action}/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 37790
+        }
+      ],
+      //external config
+      "UpstreamPathTemplate": "/{controller}/{action}/{id}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ]
+    },
+    {
+      //internal config
+      "DownstreamPathTemplate": "/api/{controller}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 37790
+        }
+      ],
+      //external config
+      "UpstreamPathTemplate": "/{controller}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Post",
+        "Put",
+        "Delete"
+      ]
+    }
+
+   
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:3779"
+  }
+}
