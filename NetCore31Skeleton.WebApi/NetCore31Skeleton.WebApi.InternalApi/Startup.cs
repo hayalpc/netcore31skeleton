@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using NetCore31Skeleton.Library.Log;
 using NetCore31Skeleton.WebApi.Core.Extensions;
 using NetCore31Skeleton.WebApi.Core.Utils;
 using NetCore31Skeleton.WebApi.Core.Utils.Interfaces;
@@ -14,6 +15,7 @@ using NetCore31Skeleton.WebApi.InternalApi.Extensions;
 using NetCore31Skeleton.WebApi.InternalApi.Filters;
 using NetCore31Skeleton.WebApi.Repository.Seeds;
 using Newtonsoft.Json.Serialization;
+using NLog;
 using System;
 using System.Text;
 
@@ -57,7 +59,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi
 
             services.AddHttpClientUtils();
 
-            services.AddScoped<ITokenCreator, TokenCreator>();
+            services.AddSingleton<ITokenCreator, TokenCreator>();
 
             services.AddTransients();
 
@@ -82,7 +84,6 @@ namespace NetCore31Skeleton.WebApi.InternalApi
                         IssuerSigningKey = key,
                     };
                 });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -90,16 +91,20 @@ namespace NetCore31Skeleton.WebApi.InternalApi
         {
             if (env.IsDevelopment())
             {
+                GlobalDiagnosticsContext.Set("configDir", Helper.GetConfigStr("configDir", "C:\\Logs"));
+
                 app.UseDeveloperExceptionPage();
             }
             else
             {
+                GlobalDiagnosticsContext.Set("configDir", Helper.GetConfigStr("configDir", "C:\\Logs"));
+
                 app.UseExceptionHandler("/error/500");
             }
 
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
-            SeedDatabase.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
+            //SeedDatabase.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
 
             app.UseRouting();
 

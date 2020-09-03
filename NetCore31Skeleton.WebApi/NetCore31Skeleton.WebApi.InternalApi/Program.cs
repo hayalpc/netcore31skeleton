@@ -42,12 +42,13 @@ namespace NetCore31Skeleton.WebApi.InternalApi
                 logging.ClearProviders();
 
                 logging.AddConsole();
+                logging.AddDebug();
             })
             .UseIIS()
             .UseIISIntegration()
             .UseStartup<Startup>()
             .UseUrls(URL)
-            //.UseNLog()
+            .UseNLog()
             .Build();
 
             if (isWindows && isService && !URL.Contains("localhost"))

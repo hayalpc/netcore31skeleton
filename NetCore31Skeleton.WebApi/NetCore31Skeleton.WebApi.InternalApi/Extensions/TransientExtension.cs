@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using NetCore31Skeleton.Library.Log;
-using NetCore31Skeleton.Library.Log.Interfaces;
 using NetCore31Skeleton.WebApi.Business;
 using NetCore31Skeleton.WebApi.Business.Interfaces;
 using NetCore31Skeleton.WebApi.Repository;

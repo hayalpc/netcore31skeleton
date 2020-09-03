@@ -17,6 +17,7 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Context
 
         public DbSet<Note> Note { get; set; }
         public DbSet<Category> Category { get; set; }
+        public DbSet<Log> Log { get; set; }
 
     }
 }

@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace NetCore31Skeleton.Library.Log.Interfaces
+namespace NetCore31Skeleton.Library.Log
 {
-    public interface IGenericLogger : Microsoft.Extensions.Logging.ILogger
+    public interface IGenericLogger : ILogger
     {
         void WriteLog(LogLevel logType, Exception exception, string message);
         void Warning(Exception exception, string message);

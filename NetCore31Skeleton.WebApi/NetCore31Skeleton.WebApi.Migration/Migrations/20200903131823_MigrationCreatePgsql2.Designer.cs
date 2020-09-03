@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCore31Skeleton.WebApi.MigrationTool.Context;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
 {
     [DbContext(typeof(MigrationDbContext))]
-    partial class MigrationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200903131823_MigrationCreatePgsql2")]
+    partial class MigrationCreatePgsql2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,14 +69,6 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
 
                     b.Property<string>("Message")
                         .HasColumnType("text");
-
-                    b.Property<string>("SessionId")
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
-
-                    b.Property<string>("TraceId")
-                        .HasColumnType("character varying(128)")
-                        .HasMaxLength(128);
 
                     b.HasKey("Id");
 
