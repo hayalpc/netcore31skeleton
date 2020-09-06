@@ -19,6 +19,130 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                 .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
+            modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.AppRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(32);
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppRole","dbo");
+                });
+
+            modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.AppUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(64);
+
+                    b.Property<DateTime>("LastLoginTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(32);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(128);
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Surname")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(32);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(32);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppUser","dbo");
+                });
+
+            modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.AppUserRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("AppRoleId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppRoleId");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("AppUserRole","dbo");
+                });
+
             modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.Category", b =>
                 {
                     b.Property<long>("Id")
@@ -29,11 +153,27 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("character varying(512)")
+                        .HasMaxLength(512);
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -52,6 +192,12 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
 
                     b.Property<string>("Callsite")
                         .HasColumnType("text");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Exception")
                         .HasColumnType("text");
@@ -72,9 +218,18 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("TraceId")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -94,17 +249,140 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("character varying(512)")
+                        .HasMaxLength(512);
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Title")
-                        .HasColumnType("text");
+                        .IsRequired()
+                        .HasColumnType("character varying(128)")
+                        .HasMaxLength(128);
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Note","dbo");
+                });
+
+            modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.Transaction", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(8,2)");
+
+                    b.Property<string>("Channel")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(32);
+
+                    b.Property<DateTime?>("ChargeDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("CreateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ErrDesc")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Error")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(128);
+
+                    b.Property<Guid>("Guid")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Item")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(64);
+
+                    b.Property<long>("MerchantId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Msisdn")
+                        .IsRequired()
+                        .HasColumnType("varchar")
+                        .HasMaxLength(16);
+
+                    b.Property<long>("OperatorId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("OperatorTransId")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("OrderId")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(64);
+
+                    b.Property<DateTime?>("RefundDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("RefundSource")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(64);
+
+                    b.Property<long>("ServiceId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("integer");
+
+                    b.Property<long?>("SubId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UpdateUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserIp")
+                        .HasColumnType("varchar")
+                        .HasMaxLength(32);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Transaction","dbo");
+                });
+
+            modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.AppUserRole", b =>
+                {
+                    b.HasOne("NetCore31Skeleton.WebApi.Repository.Models.AppRole", "AppRole")
+                        .WithMany("AppUserRoles")
+                        .HasForeignKey("AppRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NetCore31Skeleton.WebApi.Repository.Models.AppUser", "AppUser")
+                        .WithMany("AppUserRoles")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("NetCore31Skeleton.WebApi.Repository.Models.Note", b =>

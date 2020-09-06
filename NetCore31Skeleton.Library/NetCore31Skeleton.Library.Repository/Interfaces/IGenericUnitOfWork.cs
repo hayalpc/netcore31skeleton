@@ -22,10 +22,6 @@ namespace NetCore31Skeleton.Library.Repository.Interfaces
 
         void SetIsolationLevel(IsolationLevel level);
 
-        int ExecuteSqlCommand(FormattableString sql);
-        int ExecuteSqlCommand(RawSqlString sql,  params object[] parameters);
-        int ExecuteSqlCommand(RawSqlString sql, IEnumerable<object> parameters);
-
         int ExecuteSqlRaw(string sql, params object[] parameters);
         int ExecuteSqlRaw(string sql, IEnumerable<object> parameters);
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NetCore31Skeleton.WebApi.Repository.Models;
-using System.Net;
 
 namespace NetCore31Skeleton.WebApi.MigrationTool.Context
 {
@@ -8,6 +7,11 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Context
     {
         public MigrationDbContext(DbContextOptions<MigrationDbContext> options) : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -18,6 +22,11 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Context
         public DbSet<Note> Note { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Log> Log { get; set; }
+        public DbSet<Transaction> Transaction { get; set; }
+
+        public DbSet<AppUser> AppUser { get; set; }
+        public DbSet<AppRole> AppRole { get; set; }
+        public DbSet<AppUserRole> AppUserRole { get; set; }
 
     }
 }

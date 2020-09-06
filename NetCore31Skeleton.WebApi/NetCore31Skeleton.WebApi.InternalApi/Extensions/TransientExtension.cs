@@ -14,11 +14,13 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Extensions
             #region Business
             services.AddTransient<ICategoryBusiness, CategoryBusiness>();
             services.AddTransient<INoteBusiness, NoteBusiness>();
+            services.AddTransient<ITransactionBusiness, TransactionBusiness>();
             #endregion Business
 
             #region Repository
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<INoteRepository, NoteRepository>();
+            services.AddTransient<ITransactionRepository, TransactionRepository>();
             #endregion Repository
 
             #region Logger

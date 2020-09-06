@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NetCore31Skeleton.WebApi.Repository.Models
 {
     [Table("Log", Schema ="dbo")]
-    public class Log : GenericModel<long>
+    public class Log 
     {
         [Key]
         public long Id { get; set; }
@@ -15,7 +15,7 @@ namespace NetCore31Skeleton.WebApi.Repository.Models
         public string Level { get; set; }
         public string Message { get; set; }
         public string Logger { get; set; }
-        public string Callsite { get; set; }
+        public string CallSite { get; set; }
         public string Exception { get; set; }
         [StringLength(128)]
         public string TraceId { get; set; }

@@ -7,6 +7,8 @@ namespace NetCore31Skeleton.Library.Log
     {
         public abstract void WriteLog(LogLevel logType, Exception exception, string message);
 
+        public abstract void Debug(object message);
+
         public abstract void Debug(string message);
 
         public abstract void Debug(Exception exception, string message);

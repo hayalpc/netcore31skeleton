@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>c15ca305-a300-4072-b307-5d42b92589f6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,6 +36,15 @@
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Business\NetCore31Skeleton.WebApi.Business.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Core\NetCore31Skeleton.WebApi.Core.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Repository\NetCore31Skeleton.WebApi.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 

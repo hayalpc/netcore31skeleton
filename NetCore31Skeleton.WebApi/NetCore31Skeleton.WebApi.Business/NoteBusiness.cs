@@ -25,15 +25,12 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                unitOfWork.BeginTransaction();
                 repository.Delete(entity);
                 unitOfWork.SaveChanges();
-                unitOfWork.CommitTransaction();
                 return new SuccessDataResult<Note>(entity);
             }
             catch (Exception exp)
             {
-                unitOfWork.RollBackTransaction();
                 return new ErrorDataResult<Note>(500,exp.Message);
             }
         }
@@ -42,8 +39,8 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.Snapshot);
-                var entity = repository.GetAll().ToList();
+                unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.ReadUncommitted);
+                var entity = repository.GetQuery(x=>x.StatusId == Library.Repository.Status.Active).ToList();
                 return new SuccessDataResult<List<Note>>(entity);
             }
             catch (Exception exp)
@@ -56,8 +53,8 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.Snapshot);
-                var entity = repository.Get(Id);
+                unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.ReadUncommitted);
+                var entity = repository.GetById(Id);
                 return new SuccessDataResult<Note>(entity);
             }
             catch (Exception exp)
@@ -70,15 +67,12 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                unitOfWork.BeginTransaction();
                 repository.Insert(entity);
                 unitOfWork.SaveChanges();
-                unitOfWork.CommitTransaction();
                 return new SuccessDataResult<Note>(entity);
             }
             catch (Exception exp)
             {
-                unitOfWork.RollBackTransaction();
                 return new ErrorDataResult<Note>(500, exp.Message);
             }
         }
@@ -87,15 +81,12 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                unitOfWork.BeginTransaction();
                 repository.Update(entity);
                 unitOfWork.SaveChanges();
-                unitOfWork.CommitTransaction();
                 return new SuccessDataResult<Note>(entity);
             }
             catch (Exception exp)
             {
-                unitOfWork.RollBackTransaction();
                 return new ErrorDataResult<Note>(500, exp.Message);
             }
         }

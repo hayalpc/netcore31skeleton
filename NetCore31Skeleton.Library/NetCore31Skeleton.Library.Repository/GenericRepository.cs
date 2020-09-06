@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace NetCore31Skeleton.Library.Repository
 {
@@ -19,14 +20,33 @@ namespace NetCore31Skeleton.Library.Repository
             this.context = context;
         }
 
-        public IEnumerable<Tentity> GetAll()
+        public DbSet<Tentity> GetContext()
         {
-            return context.Set<Tentity>().ToList();
+            return context.Set<Tentity>();
         }
 
-        public Tentity Get(Ttype Id)
+        public IQueryable<Tentity> GetQuery(Expression<Func<Tentity, bool>> predicate)
         {
-            return context.Set<Tentity>().Find(Id);
+            return context.Set<Tentity>().Where(predicate);
+        }
+
+        public Tentity Get(Expression<Func<Tentity, bool>> predicate)
+        {
+            return context.Set<Tentity>().Where(predicate).AsNoTracking().FirstOrDefault();
+        }
+
+        public Tentity GetByIdNoTracking(Ttype Id)
+        {
+            var entity = context.Set<Tentity>().Find(Id);
+            if (entity != null)
+                context.Entry(entity).State = EntityState.Detached;
+            return entity;
+        }
+
+        public Tentity GetById(Ttype Id)
+        {
+            var entity = context.Set<Tentity>().Find(Id);
+            return entity;
         }
 
         public void Insert(Tentity entity)
@@ -36,22 +56,24 @@ namespace NetCore31Skeleton.Library.Repository
 
         public void Update(Tentity entity)
         {
+            context.Entry(entity).State = EntityState.Modified;
             context.Set<Tentity>().Update(entity);
         }
 
         public void Delete(Tentity entity)
         {
+            context.Entry(entity).State = EntityState.Deleted;
             context.Set<Tentity>().Remove(entity);
         }
 
-        public void SaveChanges()
+        public int SaveChanges()
         {
-            context.SaveChanges();
+            return context.SaveChanges();
         }
 
-        public IEnumerable<Tentity> Find(Expression<Func<Tentity, bool>> predicate)
+        public async Task<int> SaveChangesAsync()
         {
-            return context.Set<Tentity>().Where(predicate);
+            return await context.SaveChangesAsync();
         }
 
         public void InsertRange(IEnumerable<Tentity> entities)
@@ -59,9 +81,17 @@ namespace NetCore31Skeleton.Library.Repository
             context.Set<Tentity>().AddRange(entities);
         }
 
+        public void UpdateRange(IEnumerable<Tentity> entities)
+        {
+            context.Entry(entities).State = EntityState.Modified;
+            context.Set<Tentity>().UpdateRange(entities);
+        }
+
         public void DeleteRange(IEnumerable<Tentity> entities)
         {
+            context.Entry(entities).State = EntityState.Deleted;
             context.Set<Tentity>().RemoveRange(entities);
         }
+
     }
 }

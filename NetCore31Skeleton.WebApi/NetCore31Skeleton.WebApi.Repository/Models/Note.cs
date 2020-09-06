@@ -8,12 +8,16 @@ namespace NetCore31Skeleton.WebApi.Repository.Models
     [Table("Note", Schema = "dbo")]
     public class Note : GenericModel<long>
     {
-        [Key]
-        public long Id { get; set; }
+        [Required]
+        [StringLength(128)]
         public string Title { get; set; }
+
+        [Required]
+        [StringLength(512)]
         public string Description { get; set; }
+
+        [Required]
         public long CategoryId { get; set; }
-        public DateTime CreateTime { get; set; }
 
         public Category Category { get; set; }
     }

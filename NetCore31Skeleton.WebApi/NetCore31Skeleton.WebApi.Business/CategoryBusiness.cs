@@ -36,7 +36,7 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                var entity = repository.GetAll().ToList();
+                var entity = repository.GetQuery(x=>x.StatusId == Library.Repository.Status.Active).ToList();
                 return new SuccessDataResult<List<Category>>(entity);
             }
             catch (Exception exp)
@@ -49,7 +49,7 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             try
             {
-                var entity = repository.Get(Id);
+                var entity = repository.GetById(Id);
                 return new SuccessDataResult<Category>(entity);
             }
             catch (Exception exp)

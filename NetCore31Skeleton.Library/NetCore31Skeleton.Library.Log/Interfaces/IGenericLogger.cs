@@ -15,6 +15,7 @@ namespace NetCore31Skeleton.Library.Log
         void Error(Exception exception, string message);
         void Error(string message);
         void Debug(Exception exception, string message);
+        void Debug(object message);
         void Debug(string message);
     }
 }

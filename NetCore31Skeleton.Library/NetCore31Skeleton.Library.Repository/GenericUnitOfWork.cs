@@ -111,24 +111,6 @@ namespace NetCore31Skeleton.Library.Repository
             //context.Database.ExecuteSqlRaw(str);
         }
 
-        [Obsolete]
-        public int ExecuteSqlCommand(FormattableString sql)
-        {
-            return context.Database.ExecuteSqlCommand(sql);
-        }
-
-        [Obsolete]
-        public int ExecuteSqlCommand(RawSqlString sql, params object[] parameters)
-        {
-            return context.Database.ExecuteSqlCommand(sql, parameters);
-        }
-
-        [Obsolete]
-        public int ExecuteSqlCommand(RawSqlString sql, IEnumerable<object> parameters)
-        {
-            return context.Database.ExecuteSqlCommand(sql, parameters);
-        }
-
         public int ExecuteSqlRaw(string sql, params object[] parameters)
         {
             return context.Database.ExecuteSqlRaw(sql, parameters);

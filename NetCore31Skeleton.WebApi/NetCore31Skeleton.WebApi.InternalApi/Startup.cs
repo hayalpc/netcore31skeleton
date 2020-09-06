@@ -33,34 +33,33 @@ namespace NetCore31Skeleton.WebApi.InternalApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(options =>
+            services.AddControllers(options =>
             {
                 options.EnableEndpointRouting = false;
                 options.Filters.Add(new CustomValidateAttribute());
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            services.AddControllers().AddNewtonsoftJson(options =>
+            })
+            .AddNewtonsoftJson(options =>
             {
+                options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            });
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddMemoryCache();
-
             services.AddDbSelector();
+            services.AddHttpClientUtils();
 
             services.AddAutoMapper(typeof(Startup));
 
-            services.AddResources();
-
-            services.AddHttpClientUtils();
+            services.AddMemoryCache();
 
             services.AddSingleton<ITokenCreator, TokenCreator>();
-
+            services.AddResources();
             services.AddTransients();
 
             services.AddAuthentication(options =>
@@ -104,8 +103,6 @@ namespace NetCore31Skeleton.WebApi.InternalApi
 
             app.UseStatusCodePagesWithReExecute("/error/{0}");
 
-            //SeedDatabase.Initialize(app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope().ServiceProvider);
-
             app.UseRouting();
 
             app.UseAuthentication();
@@ -116,7 +113,6 @@ namespace NetCore31Skeleton.WebApi.InternalApi
                 endpoints.MapControllers();
             });
 
-            app.UseMvc();
         }
     }
 }

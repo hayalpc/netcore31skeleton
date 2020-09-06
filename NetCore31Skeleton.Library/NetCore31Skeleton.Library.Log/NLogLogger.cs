@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
@@ -23,6 +24,11 @@ namespace NetCore31Skeleton.Library.Log
         public override void Debug(Exception exception, string message)
         {
             logger.Debug(exception, message);
+        }
+
+        public override void Debug(object message)
+        {
+            logger.Debug(JsonConvert.SerializeObject(message));
         }
 
         public override void Debug(string message)
