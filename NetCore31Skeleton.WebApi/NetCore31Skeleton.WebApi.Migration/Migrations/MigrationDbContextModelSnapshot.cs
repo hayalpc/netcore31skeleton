@@ -190,14 +190,8 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                     b.Property<string>("Application")
                         .HasColumnType("text");
 
-                    b.Property<string>("Callsite")
+                    b.Property<string>("CallSite")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("CreateUserId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Exception")
                         .HasColumnType("text");
@@ -218,18 +212,9 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("TraceId")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("UpdateUserId")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
 {
     [DbContext(typeof(MigrationDbContext))]
-    [Migration("20200905211831_Initialize1")]
-    partial class Initialize1
+    [Migration("20200908223217_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,14 +192,8 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                     b.Property<string>("Application")
                         .HasColumnType("text");
 
-                    b.Property<string>("Callsite")
+                    b.Property<string>("CallSite")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("CreateTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int>("CreateUserId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Exception")
                         .HasColumnType("text");
@@ -220,18 +214,9 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
 
-                    b.Property<int>("StatusId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("TraceId")
                         .HasColumnType("character varying(128)")
                         .HasMaxLength(128);
-
-                    b.Property<DateTime?>("UpdateTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("UpdateUserId")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 

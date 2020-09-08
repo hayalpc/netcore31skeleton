@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
 {
-    public partial class Initialize1 : Migration
+    public partial class Initialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -81,17 +81,12 @@ namespace NetCore31Skeleton.WebApi.MigrationTool.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreateTime = table.Column<DateTime>(nullable: false),
-                    CreateUserId = table.Column<int>(nullable: false),
-                    UpdateTime = table.Column<DateTime>(nullable: true),
-                    UpdateUserId = table.Column<int>(nullable: true),
-                    StatusId = table.Column<int>(nullable: false),
                     Application = table.Column<string>(nullable: true),
                     Logged = table.Column<DateTime>(nullable: false),
                     Level = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
                     Logger = table.Column<string>(nullable: true),
-                    Callsite = table.Column<string>(nullable: true),
+                    CallSite = table.Column<string>(nullable: true),
                     Exception = table.Column<string>(nullable: true),
                     TraceId = table.Column<string>(maxLength: 128, nullable: true),
                     SessionId = table.Column<string>(maxLength: 128, nullable: true)
