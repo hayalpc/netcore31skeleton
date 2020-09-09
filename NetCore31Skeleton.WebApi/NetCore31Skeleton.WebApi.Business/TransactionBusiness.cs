@@ -1,4 +1,5 @@
-﻿using NetCore31Skeleton.Library.Repository.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using NetCore31Skeleton.Library.Repository.Interfaces;
 using NetCore31Skeleton.WebApi.Business.Interfaces;
 using NetCore31Skeleton.WebApi.Core.Results;
 using NetCore31Skeleton.WebApi.Repository.Context;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace NetCore31Skeleton.WebApi.Business
 {
@@ -50,11 +52,24 @@ namespace NetCore31Skeleton.WebApi.Business
             }
         }
 
-        public IDataResult<Transaction> GetById(long Id)
+        public async Task<IDataResult<List<Transaction>>> GetAllAsync()
         {
             try
             {
                 unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.ReadUncommitted);
+                var entity = await repository.GetQuery(x=>x.StatusId == Library.Repository.Status.Active).ToListAsync();
+                return new SuccessDataResult<List<Transaction>>(entity);
+            }
+            catch (Exception exp)
+            {
+                return new ErrorDataResult<List<Transaction>>(500, exp.Message);
+            }
+        }
+
+        public IDataResult<Transaction> GetById(long Id)
+        {
+            try
+            {
                 var entity = repository.GetById(Id);
                 return new SuccessDataResult<Transaction>(entity);
             }
@@ -78,6 +93,20 @@ namespace NetCore31Skeleton.WebApi.Business
             }
         }
 
+        public async Task<IDataResult<Transaction>> GetByQueryAsync(Expression<Func<Transaction, bool>> predicate)
+        {
+            try
+            {
+                unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.ReadUncommitted);
+                var entity = await repository.GetQuery(predicate).FirstOrDefaultAsync();
+                return new SuccessDataResult<Transaction>(entity);
+            }
+            catch (Exception exp)
+            {
+                return new ErrorDataResult<Transaction>(500, exp.Message);
+            }
+        }
+
         public IDataResult<Transaction> Insert(Transaction entity)
         {
             try
@@ -92,12 +121,40 @@ namespace NetCore31Skeleton.WebApi.Business
             }
         }
 
+        public async Task<IDataResult<Transaction>> InsertAsync(Transaction entity)
+        {
+            try
+            {
+                repository.Insert(entity);
+                await unitOfWork.SaveChangesAsync();
+                return new SuccessDataResult<Transaction>(entity);
+            }
+            catch (Exception exp)
+            {
+                return new ErrorDataResult<Transaction>(500, exp.Message);
+            }
+        }
+
         public IDataResult<Transaction> Update(Transaction entity)
         {
             try
             {
                 repository.Update(entity);
                 unitOfWork.SaveChanges();
+                return new SuccessDataResult<Transaction>(entity);
+            }
+            catch (Exception exp)
+            {
+                return new ErrorDataResult<Transaction>(500, exp.Message);
+            }
+        }
+
+        public async Task<IDataResult<Transaction>> UpdateAsync(Transaction entity)
+        {
+            try
+            {
+                repository.Update(entity);
+                await unitOfWork.SaveChangesAsync();
                 return new SuccessDataResult<Transaction>(entity);
             }
             catch (Exception exp)

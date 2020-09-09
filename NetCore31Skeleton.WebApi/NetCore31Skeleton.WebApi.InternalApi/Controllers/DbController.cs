@@ -24,12 +24,13 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
             this.logger = logger;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("Get")]
+        public async Task<IActionResult> Get()
         {
             Stopwatch stopWatch = Stopwatch.StartNew();
 
             logger.Debug("selam Debug " + HttpContext.TraceIdentifier);
+
             var insert = transactionBusiness.Insert(new Transaction()
             {
                 MerchantId = 1,
@@ -46,6 +47,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
 
                 var tid = insert.Data.Id;
                 logger.Info($"TxnId {tid}");
+
                 var getTrans = transactionBusiness.GetByQuery(x => x.Status == Core.TransStatus.NEW);
                 if (getTrans.Data is Transaction)
                 {
@@ -64,6 +66,57 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
                     transaction.Error = HttpContext.TraceIdentifier;
 
                     var result = transactionBusiness.Update(transaction);
+
+                    logger.Debug(result);
+
+                }
+            }
+            logger.Info("selam Info " + HttpContext.TraceIdentifier + " " + stopWatch.ElapsedMilliseconds + "ms");
+            return Ok();
+        }
+        
+        [HttpGet("GetAsync")]
+        public async Task<IActionResult> GetAsync()
+        {
+            Stopwatch stopWatch = Stopwatch.StartNew();
+
+            logger.Debug("selam Debug " + HttpContext.TraceIdentifier);
+
+            var insert = await transactionBusiness.InsertAsync(new Transaction()
+            {
+                MerchantId = 1,
+                ServiceId = 1,
+                Msisdn = "5433379967",
+                OperatorId = 1,
+                Amount = 15.01m,
+                Status = Core.TransStatus.NEW,
+                Item = "Test Item",
+
+            });
+            if (insert.Data is Transaction)
+            {
+
+                var tid = insert.Data.Id;
+                logger.Info($"TxnId {tid}");
+
+                var getTrans = await transactionBusiness.GetByQueryAsync(x => x.Status == Core.TransStatus.NEW);
+                if (getTrans.Data is Transaction)
+                {
+                    var transaction = getTrans.Data;
+                    logger.Info($"TxnId{tid} {transaction.Id}");
+
+                    transaction.Status = Core.TransStatus.CHARGED;
+                    transaction.ChargeDate = DateTime.Now;
+                    transaction.RefundDate = DateTime.Now;
+                    transaction.RefundSource = $"Test {tid}";
+                    transaction.OperatorTransId = Guid.NewGuid().ToString("D");
+                    transaction.OrderId = Guid.NewGuid().ToString("D");
+                    transaction.UserIp = HttpContext.Connection.RemoteIpAddress + ":" + HttpContext.Connection.RemotePort;
+                    transaction.UpdateTime = DateTime.Now;
+                    transaction.UpdateUserId = -1;
+                    transaction.Error = HttpContext.TraceIdentifier;
+
+                    var result = await transactionBusiness.UpdateAsync(transaction);
 
                     logger.Debug(result);
 

@@ -13,7 +13,7 @@ namespace NetCore31Skeleton.Library.Repository
     public abstract class GenericUnitOfWork<TContext> : IGenericUnitOfWork<TContext> where TContext : DbContext
     {
         private readonly TContext context;
-
+        private IsolationLevel UsedIsolationLevel = IsolationLevel.ReadCommitted;
         private IDbContextTransaction transaction;
 
         public GenericUnitOfWork(TContext context)
@@ -85,30 +85,34 @@ namespace NetCore31Skeleton.Library.Repository
 
         public void SetIsolationLevel(IsolationLevel level)
         {
-            var str = "SET TRANSACTION ISOLATION LEVEL ";
-            switch (level)
+            if (UsedIsolationLevel != level)
             {
-                case IsolationLevel.ReadCommitted:
-                    str += "READ COMMITTED";
-                    break;
-                case IsolationLevel.ReadUncommitted:
-                    str += "READ UNCOMMITTED";
-                    break;
-                case IsolationLevel.RepeatableRead:
-                    str += "REPEATABLE READ";
-                    break;
-                case IsolationLevel.Serializable:
-                    str += "SERIALIZABLE";
-                    break;
-                case IsolationLevel.Snapshot:
-                    str += "SNAPSHOT";
-                    break;
-                default:
-                    str += "READ COMMITTED";
-                    break;
+                UsedIsolationLevel = level;
+
+                var str = "SET TRANSACTION ISOLATION LEVEL ";
+                switch (level)
+                {
+                    case IsolationLevel.ReadCommitted:
+                        str += "READ COMMITTED";
+                        break;
+                    case IsolationLevel.ReadUncommitted:
+                        str += "READ UNCOMMITTED";
+                        break;
+                    case IsolationLevel.RepeatableRead:
+                        str += "REPEATABLE READ";
+                        break;
+                    case IsolationLevel.Serializable:
+                        str += "SERIALIZABLE";
+                        break;
+                    case IsolationLevel.Snapshot:
+                        str += "SNAPSHOT";
+                        break;
+                    default:
+                        str += "READ COMMITTED";
+                        break;
+                }
+                ExecuteSqlRaw(str);
             }
-            ExecuteSqlRaw(str);
-            //context.Database.ExecuteSqlRaw(str);
         }
 
         public int ExecuteSqlRaw(string sql, params object[] parameters)

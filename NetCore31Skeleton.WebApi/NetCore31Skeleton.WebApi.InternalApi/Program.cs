@@ -32,6 +32,8 @@ namespace NetCore31Skeleton.WebApi.InternalApi
             {
                 o.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(15);
                 o.Limits.RequestHeadersTimeout = TimeSpan.FromSeconds(30);
+                o.Limits.MaxConcurrentConnections = 500;
+                o.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(2);
             })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
@@ -41,7 +43,6 @@ namespace NetCore31Skeleton.WebApi.InternalApi
             {
                 logging.ClearProviders();
 
-                logging.AddConsole();
                 logging.AddDebug();
             })
             .UseIIS()

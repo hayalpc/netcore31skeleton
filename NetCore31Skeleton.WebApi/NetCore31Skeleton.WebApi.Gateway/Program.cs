@@ -33,6 +33,7 @@ namespace NetCore31Skeleton.WebApi.Gateway
             {
                 o.Limits.KeepAliveTimeout = TimeSpan.FromMinutes(15);
                 o.Limits.RequestHeadersTimeout = TimeSpan.FromSeconds(30);
+                o.Limits.MaxConcurrentConnections = 1000;
             })
             .ConfigureAppConfiguration((hostingContext, config) =>
             {
