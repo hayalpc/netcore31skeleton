@@ -24,6 +24,7 @@ namespace NetCore31Skeleton.Library.Repository.Interfaces
         void Insert(Tentity entity);
         void InsertRange(IEnumerable<Tentity> entities);
         void Update(Tentity entity);
+        void Update(Tentity entity, params string[] fields)
         void UpdateRange(IEnumerable<Tentity> entities);
         void Delete(Tentity entity);
         void DeleteRange(IEnumerable<Tentity> entities);

@@ -60,6 +60,38 @@ namespace NetCore31Skeleton.Library.Repository
             context.Set<Tentity>().Update(entity);
         }
 
+        public void Update(Tentity entity, List<string> fields)
+        {
+            var attack = context.Set<Tentity>().Attach(entity);
+            foreach (var field in fields)
+            {
+                if (entity.GetType().GetProperty(field) != null)//geçersiz bir 
+                {
+                    attack.Property(field).IsModified = true;
+                }
+                else
+                {
+                    throw new Exception($"{field} is not a property of " + entity.GetType().Name);
+                }
+            }
+        }
+
+        public void Update(Tentity entity, params string[] fields)
+        {
+            var attack = context.Set<Tentity>().Attach(entity);
+            foreach (var field in fields)
+            {
+                if (entity.GetType().GetProperty(field) != null)//geçersiz bir 
+                {
+                    attack.Property(field).IsModified = true;
+                }
+                else
+                {
+                    throw new Exception($"{field} is not a property of " + entity.GetType().Name);
+                }
+            }
+        }
+
         public void Delete(Tentity entity)
         {
             context.Entry(entity).State = EntityState.Deleted;
