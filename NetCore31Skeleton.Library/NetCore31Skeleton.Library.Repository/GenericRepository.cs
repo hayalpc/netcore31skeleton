@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NetCore31Skeleton.Library.Repository
 {
-    public abstract class GenericRepository<Ttype, Tentity, Tcontext> : IGenericRepository<Ttype, Tentity, Tcontext>
+    public abstract class GenericRepository<Tentity,Ttype, Tcontext> : IGenericRepository<Tentity,Ttype, Tcontext>
         where Tentity : class, IGenericModel<Ttype>
         where Tcontext : DbContext
         where Ttype : struct

@@ -8,15 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using NetCore31Skeleton.Library.Log;
+using NetCore31Skeleton.WebApi.Business;
 using NetCore31Skeleton.WebApi.Core.Extensions;
 using NetCore31Skeleton.WebApi.Core.Utils;
 using NetCore31Skeleton.WebApi.Core.Utils.Interfaces;
 using NetCore31Skeleton.WebApi.InternalApi.Extensions;
 using NetCore31Skeleton.WebApi.InternalApi.Filters;
-using NetCore31Skeleton.WebApi.Repository.Seeds;
+using NetCore31Skeleton.WebApi.Repository;
 using Newtonsoft.Json.Serialization;
 using NLog;
-using System;
 using System.Text;
 
 namespace NetCore31Skeleton.WebApi.InternalApi
@@ -36,7 +36,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi
             services.AddControllers(options =>
             {
                 options.EnableEndpointRouting = false;
-                options.Filters.Add(new CustomValidateAttribute());
+                options.Filters.Add(new ValidModelAttribute());
             })
             .AddNewtonsoftJson(options =>
             {
@@ -60,7 +60,11 @@ namespace NetCore31Skeleton.WebApi.InternalApi
 
             services.AddSingleton<ITokenCreator, TokenCreator>();
             services.AddResources();
-            services.AddTransients();
+
+            services.AddBusinesses();
+            services.AddRepositories();
+
+            services.AddTransient<IGenericLogger, NLogLogger>();
 
             services.AddAuthentication(options =>
             {

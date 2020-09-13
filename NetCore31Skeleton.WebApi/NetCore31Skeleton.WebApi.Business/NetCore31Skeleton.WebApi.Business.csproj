@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NetCore31Skeleton.Library\NetCore31Skeleton.Library.Log\NetCore31Skeleton.Library.Log.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Core\NetCore31Skeleton.WebApi.Core.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Repository\NetCore31Skeleton.WebApi.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validations\" />
   </ItemGroup>
 
 </Project>

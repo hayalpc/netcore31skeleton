@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +23,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
         }
 
         [HttpGet("Get")]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             Stopwatch stopWatch = Stopwatch.StartNew();
 
@@ -44,7 +42,6 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
             });
             if (insert.Data is Transaction)
             {
-
                 var tid = insert.Data.Id;
                 logger.Info($"TxnId {tid}");
 
@@ -74,7 +71,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
             logger.Info("selam Info " + HttpContext.TraceIdentifier + " " + stopWatch.ElapsedMilliseconds + "ms");
             return Ok();
         }
-        
+
         [HttpGet("GetAsync")]
         public async Task<IActionResult> GetAsync()
         {

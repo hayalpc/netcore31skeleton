@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NetCore31Skeleton.Library.Repository.Interfaces
 {
-    public interface IGenericRepository<Ttype, Tentity, Tcontext> 
+    public interface IGenericRepository<Tentity,Ttype, Tcontext> 
         where Tentity : class, IGenericModel<Ttype> 
         where Tcontext : DbContext 
         where Ttype : struct
@@ -24,7 +24,7 @@ namespace NetCore31Skeleton.Library.Repository.Interfaces
         void Insert(Tentity entity);
         void InsertRange(IEnumerable<Tentity> entities);
         void Update(Tentity entity);
-        void Update(Tentity entity, params string[] fields)
+        void Update(Tentity entity, params string[] fields);
         void UpdateRange(IEnumerable<Tentity> entities);
         void Delete(Tentity entity);
         void DeleteRange(IEnumerable<Tentity> entities);

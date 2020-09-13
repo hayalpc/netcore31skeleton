@@ -1,19 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using NetCore31Skeleton.WebApi.Core.Results;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace NetCore31Skeleton.WebApi.InternalApi.Filters
 {
-    public class CustomValidateAttribute : ActionFilterAttribute
+    public class ValidModelAttribute : ActionFilterAttribute
     {
-
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-
             if (!context.ModelState.IsValid)
             {
                 List<string> errorMessages = new List<string>();
@@ -22,9 +18,10 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Filters
 
                 var delimiter = "; ";
                 var message = "Please solve the following error(s): " + errorMessages.Aggregate((i, j) => i + delimiter + j);
-                var response = new ErrorResult(message);
+                var response = new ErrorResult(400,message);
                 context.Result = new OkObjectResult(response);
             }
+            base.OnActionExecuting(context);
         }
     }
 }

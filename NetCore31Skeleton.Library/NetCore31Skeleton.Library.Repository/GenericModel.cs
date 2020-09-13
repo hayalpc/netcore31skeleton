@@ -1,10 +1,12 @@
 ﻿using NetCore31Skeleton.Library.Repository.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace NetCore31Skeleton.Library.Repository
 {
     public abstract class GenericModel<Ttype> : IGenericModel<Ttype>
+        where Ttype : struct
     {
         [Key]
         public Ttype Id { get; set; }
@@ -16,5 +18,10 @@ namespace NetCore31Skeleton.Library.Repository
         public int? UpdateUserId { get; set; }
 
         public Status StatusId { get; set; } = Status.Active;
+
+        public string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
+        }
     }
 }
