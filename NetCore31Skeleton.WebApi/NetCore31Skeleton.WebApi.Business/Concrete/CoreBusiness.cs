@@ -101,6 +101,21 @@ namespace NetCore31Skeleton.WebApi.Business.Concrete
             }
         }
 
+        public IDataResult<List<Tentity>> GetAllByQuery(Expression<Func<Tentity, bool>> predicate)
+        {
+            try
+            {
+                unitOfWork.SetIsolationLevel(System.Data.IsolationLevel.ReadUncommitted);
+                var entity = repository.GetQuery(predicate).ToList();
+                return new SuccessDataResult<List<Tentity>>(entity);
+            }
+            catch (Exception exp)
+            {
+                logger.Error(exp.ToString());
+                return new ErrorDataResult<List<Tentity>>(500, exp.Message);
+            }
+        }
+
         public async Task<IDataResult<Tentity>> GetByQueryAsync(Expression<Func<Tentity, bool>> predicate)
         {
             try

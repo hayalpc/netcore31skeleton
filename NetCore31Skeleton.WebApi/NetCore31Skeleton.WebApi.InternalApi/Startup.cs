@@ -9,9 +9,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using NetCore31Skeleton.Library.Log;
 using NetCore31Skeleton.WebApi.Business;
+using NetCore31Skeleton.WebApi.Business.Concrete;
+using NetCore31Skeleton.WebApi.Business.Interfaces;
 using NetCore31Skeleton.WebApi.Core.Extensions;
 using NetCore31Skeleton.WebApi.Core.Utils;
-using NetCore31Skeleton.WebApi.Core.Utils.Interfaces;
 using NetCore31Skeleton.WebApi.InternalApi.Extensions;
 using NetCore31Skeleton.WebApi.InternalApi.Filters;
 using NetCore31Skeleton.WebApi.Repository;
@@ -33,19 +34,6 @@ namespace NetCore31Skeleton.WebApi.InternalApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers(options =>
-            {
-                options.EnableEndpointRouting = false;
-                options.Filters.Add(new ValidModelAttribute());
-            })
-            .AddNewtonsoftJson(options =>
-            {
-                options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
-                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
-                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            })
-            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
@@ -73,20 +61,32 @@ namespace NetCore31Skeleton.WebApi.InternalApi
 
             }).AddJwtBearer(options =>
                 {
-                    var secretKey = Helper.GetConfigStr("JwtSecurityKey", "JwtSecurityKey2020");
-                    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+                    options.RequireHttpsMetadata = false;
 
                     options.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
-                        ValidateLifetime = false,
+                        ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = Helper.GetConfigStr("InternalApiUrl", "http://localhost:63939/"),
                         ValidAudience = Helper.GetConfigStr("InternalApiUrl", "http://localhost:63939/"),
-                        IssuerSigningKey = key,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Helper.GetConfigStr("JwtSecurityKey", "JwtSecurityKey2020"))),
                     };
                 });
+
+            services.AddControllers(options =>
+            {
+                options.EnableEndpointRouting = false;
+                options.Filters.Add(new ValidModelAttribute());
+            })
+            .AddNewtonsoftJson(options =>
+            {
+                options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+                options.SerializerSettings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -32,5 +32,13 @@ namespace NetCore31Skeleton.WebApi.Repository.Models
         public DateTime LastLoginTime { get; set; }
 
         public virtual List<AppUserRole> AppUserRoles { get; set; }
+
+        public virtual string FullName
+        {
+            get
+            {
+                return Name + " " + Surname;
+            }
+        }
     }
 }

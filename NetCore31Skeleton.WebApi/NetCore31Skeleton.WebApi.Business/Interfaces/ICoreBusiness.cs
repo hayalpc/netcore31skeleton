@@ -20,6 +20,8 @@ namespace NetCore31Skeleton.WebApi.Business.Interfaces
 
         IDataResult<Tentity> GetByQuery(Expression<Func<Tentity, bool>> predicate);
 
+        IDataResult<List<Tentity>> GetAllByQuery(Expression<Func<Tentity, bool>> predicate);
+
         Task<IDataResult<Tentity>> GetByQueryAsync(Expression<Func<Tentity, bool>> predicate);
 
         IDataResult<Tentity> GetById(Ttype Id);

@@ -1,31 +1,32 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using NetCore31Skeleton.WebApi.Core.Utils.Interfaces;
+using NetCore31Skeleton.WebApi.Business.Interfaces;
+using NetCore31Skeleton.WebApi.Core.Utils;
+using NetCore31Skeleton.WebApi.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace NetCore31Skeleton.WebApi.Core.Utils
+namespace NetCore31Skeleton.WebApi.Business.Concrete
 {
     public class TokenCreator : ITokenCreator
     {
-
-        public string CreateToken()
+        public string CreateToken(AppUser appUser,List<AppRole> appUserRoles)
         {
-            var token = CreateSecurityToken();
+            var token = CreateSecurityToken(appUser, appUserRoles);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private JwtSecurityToken CreateSecurityToken()
+        private JwtSecurityToken CreateSecurityToken(AppUser appUser, List<AppRole> appUserRoles)
         {
             var token = new JwtSecurityToken(
                issuer: Helper.GetConfigStr("InternalApiUrl", "http://localhost:63939/"),
                audience: Helper.GetConfigStr("InternalApiUrl", "http://localhost:63939/"),
                expires: DateTime.Now.AddMinutes(30),
                signingCredentials: CreateCredentials(),
-               claims: CreateClaims()
+               claims: CreateClaims(appUser, appUserRoles)
              );
             return token;
         }
@@ -40,14 +41,21 @@ namespace NetCore31Skeleton.WebApi.Core.Utils
             return creds;
         }
 
-        private List<Claim> CreateClaims()
+        private List<Claim> CreateClaims(AppUser appUser, List<AppRole> appUserRoles)
         {
             var claims = new List<Claim>();
 
-            claims.Add(new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()));
-            claims.Add(new Claim(ClaimTypes.Role, "Admin"));
-            claims.Add(new Claim(ClaimTypes.Role, "Member"));
-
+            claims.Add(new Claim(ClaimTypes.Sid, appUser.Id.ToString()));
+            claims.Add(new Claim(ClaimTypes.Name, appUser.Username));
+            claims.Add(new Claim(ClaimTypes.NameIdentifier, appUser.FullName));
+            claims.Add(new Claim(ClaimTypes.Email, appUser.Email));
+            if (appUserRoles != null && appUserRoles.Count > 0)
+            {
+                foreach (var userRole in appUserRoles)
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, userRole.Name.ToString()));
+                }
+            }
             return claims;
         }
     }

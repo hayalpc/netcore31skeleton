@@ -17,6 +17,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Mapping.AutoMapperProfile
             CreateMap<Note, NoteDto>();
             CreateMap<CategoryDto, Category>();
             CreateMap<Category, CategoryDto>();
+            CreateMap<RegisterDto, AppUser>();
         }
     }
 }

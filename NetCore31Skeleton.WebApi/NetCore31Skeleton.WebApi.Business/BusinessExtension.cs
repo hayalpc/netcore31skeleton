@@ -10,6 +10,9 @@ namespace NetCore31Skeleton.WebApi.Business
         {
             #region Business
             services.AddTransient<ITransactionBusiness, TransactionBusiness>();
+            services.AddTransient<IUserBusiness, UserBusiness>();
+            services.AddTransient<IRoleBusiness, RoleBusiness>();
+            services.AddTransient<IUserRoleBusiness, UserRoleBusiness>();
             #endregion Business
         }
 
