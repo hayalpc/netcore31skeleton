@@ -1,4 +1,4 @@
-﻿using NetCore31Skeleton.WebApi.Core.Results;
+﻿using NetCore31Skeleton.Core.Results;
 using NetCore31Skeleton.WebApi.Repository.Models;
 using System.Collections.Generic;
 

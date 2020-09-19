@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NetCore31Skeleton.Core.Enums;
 using NetCore31Skeleton.Library.Log;
 using NetCore31Skeleton.WebApi.Business.Interfaces;
 using NetCore31Skeleton.WebApi.Repository.Models;
@@ -36,7 +37,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
                 Msisdn = "5433379967",
                 OperatorId = 1,
                 Amount = 15.01m,
-                Status = Core.TransStatus.NEW,
+                Status = TransStatus.NEW,
                 Item = "Test Item",
 
             });
@@ -45,13 +46,13 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
                 var tid = insert.Data.Id;
                 logger.Info($"TxnId {tid}");
 
-                var getTrans = transactionBusiness.GetByQuery(x => x.Status == Core.TransStatus.NEW);
+                var getTrans = transactionBusiness.GetByQuery(x => x.Status == TransStatus.NEW);
                 if (getTrans.Data is Transaction)
                 {
                     var transaction = getTrans.Data;
                     logger.Info($"TxnId{tid} {transaction.Id}");
 
-                    transaction.Status = Core.TransStatus.CHARGED;
+                    transaction.Status = TransStatus.CHARGED;
                     transaction.ChargeDate = DateTime.Now;
                     transaction.RefundDate = DateTime.Now;
                     transaction.RefundSource = $"Test {tid}";
@@ -86,7 +87,7 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
                 Msisdn = "5433379967",
                 OperatorId = 1,
                 Amount = 15.01m,
-                Status = Core.TransStatus.NEW,
+                Status = TransStatus.NEW,
                 Item = "Test Item",
 
             });
@@ -96,13 +97,13 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
                 var tid = insert.Data.Id;
                 logger.Info($"TxnId {tid}");
 
-                var getTrans = await transactionBusiness.GetByQueryAsync(x => x.Status == Core.TransStatus.NEW);
+                var getTrans = await transactionBusiness.GetByQueryAsync(x => x.Status == TransStatus.NEW);
                 if (getTrans.Data is Transaction)
                 {
                     var transaction = getTrans.Data;
                     logger.Info($"TxnId{tid} {transaction.Id}");
 
-                    transaction.Status = Core.TransStatus.CHARGED;
+                    transaction.Status = TransStatus.CHARGED;
                     transaction.ChargeDate = DateTime.Now;
                     transaction.RefundDate = DateTime.Now;
                     transaction.RefundSource = $"Test {tid}";

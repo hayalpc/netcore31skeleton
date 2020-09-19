@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NetCore31Skeleton.Core\NetCore31Skeleton.Core.csproj" />
     <ProjectReference Include="..\..\NetCore31Skeleton.Library\NetCore31Skeleton.Library.Repository\NetCore31Skeleton.Library.Repository.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Core\NetCore31Skeleton.WebApi.Core.csproj" />
   </ItemGroup>

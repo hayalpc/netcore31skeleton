@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\NetCore31Skeleton.Core\NetCore31Skeleton.Core.csproj" />
     <ProjectReference Include="..\..\NetCore31Skeleton.Library\NetCore31Skeleton.Library.Log\NetCore31Skeleton.Library.Log.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Business\NetCore31Skeleton.WebApi.Business.csproj" />
     <ProjectReference Include="..\NetCore31Skeleton.WebApi.Core\NetCore31Skeleton.WebApi.Core.csproj" />

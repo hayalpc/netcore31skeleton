@@ -1,0 +1,47 @@
+﻿@using NetCore31Skeleton.Web
+@using NetCore31Skeleton.Web.ViewModels
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model LoginVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giriş Yap - NetCore31Skeleton.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="~/css/login.css" rel="stylesheet" />
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Icon -->
+            <!-- Login Form -->
+            <form method="post">
+                @Html.AntiForgeryToken()
+                <h1>Login</h1>
+                <input *required type="text" class="fadeIn second" asp-for="Username" placeholder="Kullanıcı Adı">
+                <input *required type="password" class="fadeIn third" asp-for="Password" placeholder="Şifre">
+                <div class="clearfix"></div>
+                <span asp-validation-for="Username"></span>
+                <div class="clearfix"></div>
+                <span asp-validation-for="Password"></span>
+                <div class="clearfix"></div>
+                <input type="submit" class="fadeIn fourth" value="Giriş Yap">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            </form>
+
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

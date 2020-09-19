@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NetCore31Skeleton.WebApi.Core.Dtos;
+using NetCore31Skeleton.Core.Dtos;
 using NetCore31Skeleton.WebApi.Repository.Models;
 
 namespace NetCore31Skeleton.WebApi.InternalApi.Controllers

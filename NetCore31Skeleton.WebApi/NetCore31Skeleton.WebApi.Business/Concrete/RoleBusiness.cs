@@ -1,7 +1,6 @@
 ﻿using NetCore31Skeleton.Library.Log;
 using NetCore31Skeleton.Library.Repository.Interfaces;
 using NetCore31Skeleton.WebApi.Business.Interfaces;
-using NetCore31Skeleton.WebApi.Core.Results;
 using NetCore31Skeleton.WebApi.Repository;
 using NetCore31Skeleton.WebApi.Repository.Context;
 using NetCore31Skeleton.WebApi.Repository.Models;

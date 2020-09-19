@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using NetCore31Skeleton.Library.Log;
-using NetCore31Skeleton.WebApi.Core.Results;
+using NetCore31Skeleton.Core.Results;
 
 namespace NetCore31Skeleton.WebApi.InternalApi.Controllers
 {

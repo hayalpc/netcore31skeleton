@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using NetCore31Skeleton.WebApi.Core.Results;
+using NetCore31Skeleton.Core.Results;
 using System.Collections.Generic;
 using System.Linq;
 

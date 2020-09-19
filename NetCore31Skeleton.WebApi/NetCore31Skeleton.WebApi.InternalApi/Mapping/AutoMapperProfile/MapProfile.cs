@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using NetCore31Skeleton.WebApi.Core.Dtos;
+using NetCore31Skeleton.Core.Dtos;
 using NetCore31Skeleton.WebApi.Repository.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NetCore31Skeleton.WebApi.InternalApi.Mapping.AutoMapperProfile
 {
@@ -18,6 +14,8 @@ namespace NetCore31Skeleton.WebApi.InternalApi.Mapping.AutoMapperProfile
             CreateMap<CategoryDto, Category>();
             CreateMap<Category, CategoryDto>();
             CreateMap<RegisterDto, AppUser>();
+            CreateMap<AppUser, UserDto>();
+            CreateMap<UserDto, AppUser>();
         }
     }
 }

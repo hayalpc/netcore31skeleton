@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using NetCore31Skeleton.Core.Utils;
 using NetCore31Skeleton.WebApi.Business.Interfaces;
-using NetCore31Skeleton.WebApi.Core.Utils;
 using NetCore31Skeleton.WebApi.Repository.Models;
 using System;
 using System.Collections.Generic;

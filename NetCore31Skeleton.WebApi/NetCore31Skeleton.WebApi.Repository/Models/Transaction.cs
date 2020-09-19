@@ -1,5 +1,5 @@
-﻿using NetCore31Skeleton.Library.Repository;
-using NetCore31Skeleton.WebApi.Core;
+﻿using NetCore31Skeleton.Core.Enums;
+using NetCore31Skeleton.Library.Repository;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

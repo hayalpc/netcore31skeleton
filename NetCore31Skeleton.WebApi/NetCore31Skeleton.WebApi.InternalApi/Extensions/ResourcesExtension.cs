@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
-using NetCore31Skeleton.WebApi.Core.Localization;
+using NetCore31Skeleton.Core.Localization;
 
 namespace NetCore31Skeleton.WebApi.InternalApi.Extensions
 {

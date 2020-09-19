@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{3C0DA99D-2958-49FA-9F66-22CC499B0D0C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{3C0DA99D-2958-49FA-9F66-22CC499B0D0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Library", "Library", "{3819BFB8-B0E9-4092-808F-83F7EB1D3C0B}"
 EndProject
@@ -19,9 +19,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31Skeleton.WebApi.In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31Skeleton.WebApi.Gateway", "NetCore31Skeleton.WebApi\NetCore31Skeleton.WebApi.Gateway\NetCore31Skeleton.WebApi.Gateway.csproj", "{61D13929-0AB6-4A44-9AE2-9704E90A8B62}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore31Skeleton.Library.Log", "NetCore31Skeleton.Library\NetCore31Skeleton.Library.Log\NetCore31Skeleton.Library.Log.csproj", "{6EE9FB7E-BA2C-47C2-AA55-C0EC3CD5FB1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31Skeleton.Library.Log", "NetCore31Skeleton.Library\NetCore31Skeleton.Library.Log\NetCore31Skeleton.Library.Log.csproj", "{6EE9FB7E-BA2C-47C2-AA55-C0EC3CD5FB1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore31Skeleton.WebApi.MigrationTool", "NetCore31Skeleton.WebApi\NetCore31Skeleton.WebApi.Migration\NetCore31Skeleton.WebApi.MigrationTool.csproj", "{22277861-C33E-4B38-9C43-86332A4CDF1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31Skeleton.WebApi.MigrationTool", "NetCore31Skeleton.WebApi\NetCore31Skeleton.WebApi.Migration\NetCore31Skeleton.WebApi.MigrationTool.csproj", "{22277861-C33E-4B38-9C43-86332A4CDF1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{6B009E65-8C49-4D11-83D0-11FA4B055F9B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore31Skeleton.Web", "NetCore31Skeleton.Web\NetCore31Skeleton.Web\NetCore31Skeleton.Web.csproj", "{B6245C61-5F47-4E79-94EE-242AC5104F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCore31Skeleton.Core", "NetCore31Skeleton.Core\NetCore31Skeleton.Core.csproj", "{B9904B63-5C5A-4D48-A37A-9D3331A1B314}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +67,14 @@ Global
 		{22277861-C33E-4B38-9C43-86332A4CDF1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22277861-C33E-4B38-9C43-86332A4CDF1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22277861-C33E-4B38-9C43-86332A4CDF1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6245C61-5F47-4E79-94EE-242AC5104F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6245C61-5F47-4E79-94EE-242AC5104F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6245C61-5F47-4E79-94EE-242AC5104F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6245C61-5F47-4E79-94EE-242AC5104F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9904B63-5C5A-4D48-A37A-9D3331A1B314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9904B63-5C5A-4D48-A37A-9D3331A1B314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9904B63-5C5A-4D48-A37A-9D3331A1B314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9904B63-5C5A-4D48-A37A-9D3331A1B314}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +88,7 @@ Global
 		{61D13929-0AB6-4A44-9AE2-9704E90A8B62} = {3C0DA99D-2958-49FA-9F66-22CC499B0D0C}
 		{6EE9FB7E-BA2C-47C2-AA55-C0EC3CD5FB1D} = {3819BFB8-B0E9-4092-808F-83F7EB1D3C0B}
 		{22277861-C33E-4B38-9C43-86332A4CDF1C} = {3C0DA99D-2958-49FA-9F66-22CC499B0D0C}
+		{B6245C61-5F47-4E79-94EE-242AC5104F16} = {6B009E65-8C49-4D11-83D0-11FA4B055F9B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EBBE96AD-8616-4484-B708-A812051EA761}
